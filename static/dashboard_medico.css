@@ -1,0 +1,85 @@
+body {
+    background-color: #e0ede6;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.bg-custom-green {
+    background-color: #d4e3d8;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    text-align: center;
+}
+
+h4 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.custom-input {
+    background-color: #a9c9c9;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    padding: 10px;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.custom-input::placeholder {
+    color: #fff;
+}
+
+.btn {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    margin-top: 10px;
+}
+
+.btn-primary {
+    background-color: #517a7a;
+    color: #fff;
+}
+
+.btn-primary:hover {
+    background-color: #415f5f;
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+    color: #fff;
+}
+
+.btn-secondary:hover {
+    background-color: #5a6268;
+}
+
+.btn-info {
+    background-color: #517a7a;
+    color: #fff;
+}
+
+.btn-info:hover {
+    background-color: #517a7a;
+}
+
+.btn-danger {
+    background-color: #517a7a;
+    color: #fff;
+}
+
+.btn-danger:hover {
+    background-color: #517a7a;
+}

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bienvenidos al Hospital</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-image: url('/static/inicio.png'); 
+            background-size: 100% 100%; 
+            background-position: center; 
+            background-repeat: no-repeat; 
+            color: #333;
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.8); 
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .custom-btn {
+            background-color: #6c757d; 
+            color: white;
+        }
+        .custom-btn:hover {
+            background-color: #5a6268; 
+            color: white;
+        }
+        .text-center h1 {
+            color: #1e3932; 
+            font-weight: bold;
+        }
+        .text-center p {
+            color: #4a636e; 
+        }
+        .logo {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="text-center">
+            <img src="/static/logonuevo.png" alt="Hospital Logo" class="logo" width="100"> 
+            <h1>Bienvenidos al Hospital Los Cardenales</h1>
+            <p class="lead">Sistema Integral de Medicina Familiar</p>
+            <a href="{{ url_for('login') }}" class="btn custom-btn mr-2" role="button">Iniciar Sesión</a>
+        </div>
+    </div>
+</body>
+</html>

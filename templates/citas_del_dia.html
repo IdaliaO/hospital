@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Citas del Día</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='citas_del_dia.css') }}" rel="stylesheet">
+    <script>
+        function selectCita(idCita) {
+            window.location.href = '/ver_receta4/' + idCita;
+        }
+    </script>
+</head>
+<body>
+    <div class="container mt-5">
+        <h3>Citas del {{ fecha }}</h3>
+        <ul class="list-group mt-3">
+            {% if consultas %}
+                {% for consulta in consultas %}
+                    <li class="list-group-item d-flex justify-content-between align-items-center" onclick="selectCita('{{ consulta.id }}')">
+                        <span>Paciente: {{ consulta.nombre_paciente }}</span>
+                    </li>
+                {% endfor %}
+            {% else %}
+                <li class="list-group-item">No hay citas registradas para este día.</li>
+            {% endif %}
+        </ul>
+        <a href="{{ url_for('agenda') }}" class="btn btn-secondary mt-3">Regresar</a>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

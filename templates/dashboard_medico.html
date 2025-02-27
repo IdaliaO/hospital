@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Médico</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='dashboard_medico.css') }}" rel="stylesheet">
+</head>
+<body>
+    <div class="container d-flex justify-content-center align-items-center vh-100">
+        <div class="bg-custom-green p-4 shadow-sm rounded">
+            <h4>Médico</h4>
+            <form name="searchForm" action="{{ url_for('buscar_pacientes') }}" method="POST" onsubmit="return validateForm()">
+                <div class="form-group d-flex align-items-center">
+                    <input type="text" id="nombre_paciente" name="nombre_paciente" class="form-control custom-input" placeholder="Nombre completo del paciente" required>
+                <button type="submit" class="btn btn-primary">Consultar pacientes</button> 
+            </div>
+        </form>
+                <button type="button" class="btn btn-info" onclick="location.href='{{ url_for('ver_pacientes') }}'">Pacientes</button>
+                <button type="button" class="btn btn-info" onclick="location.href='{{ url_for('registro_paciente') }}'">Registrar Paciente</button>
+                <button type="button" class="btn btn-info" onclick="location.href='{{ url_for('agenda') }}'">Agenda</button>
+            
+            <a href="{{ url_for('logout') }}" class="btn btn-danger mt-3">Cerrar Sesión</a>
+        </div>
+    </div>
+    <script>
+        function validateForm() {
+            var x = document.forms["searchForm"]["nombre_paciente"].value;
+            if (x == "") {
+                alert("El campo de nombre del paciente no puede estar vacío");
+                return false;
+            }
+        }
+    </script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

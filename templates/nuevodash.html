@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Somatometría</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <header>
+        <div>
+            <img src="{{ url_for('static', filename='logo_hospital.png') }}" alt="Logo del Hospital" width="100">
+        </div>
+        <div class="user-info">
+            <span>Usuario: <input type="text" class="form-control custom-input" id="medico" value="{{ session['rfc'] }}" readonly></span>
+            <span>Domingo, 14 de Julio del 2024</span>
+            <span>9:11:45 PM</span>
+        </div>
+    </header>
+    <main>
+        <div class="header-info">
+            <span>Consultorio: 1</span>
+            <span>Turno: Matutino</span>
+            <span>Delegación: Querétaro</span>
+            <span>Universidad Politecnica de Queretaro</span>
+        </div>
+        <div class="content">
+            <div class="patient-info">
+                <form data-patient-id="{{ paciente[0] }}">                   
+                    <div class="form-group">
+                        <label for="nombre_completo">Nombre Completo</label>
+                        <input type="text" class="form-control custom-input" id="nombre_completo" name="nombre_completo" value="{{ paciente[1] }}" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="fecha_nacimiento">Fecha de nacimiento</label>
+                        <input type="text" class="form-control custom-input" id="fecha_nacimiento" name="fecha_nacimiento" value="{{ paciente[2] }}" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="enfermedades_cronicas">Enfermedades crónicas</label>
+                        <input type="text" class="form-control custom-input" id="enfermedades_cronicas" name="enfermedades_cronicas" value="{{ paciente[3] }}" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="alergias">Alergias</label>
+                        <input type="text" class="form-control custom-input" id="alergias" name="alergias" value="{{ paciente[4] }}" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="antecedentes_familiares">Antecedentes familiares</label>
+                        <input type="text" class="form-control custom-input" id="antecedentes_familiares" name="antecedentes_familiares" value="{{ paciente[5] }}" readonly>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <button type="button" class="btn btn-primary" id="btn-modificar" onclick="enableEditing()">Modificar</button>
+                        <button type="submit" class="btn btn-success" id="btn-guardar" style="display:none;">Guardar</button>
+                        <button type="button" class="btn btn-danger" onclick="eliminarPaciente()">Eliminar</button>
+                    </div>
+                </form>
+            </div>
+            <div class="somatometria">
+                <h2>Somatometría</h2>
+                <div class="form-section">
+                    <div class="measurements">
+                        <a href="{{ url_for('exploracion_diagnostico', id=paciente[0]) }}" class="btn btn-primary btn-block mb-2">Exploración y diagnóstico</a>
+                    <a href="{{ url_for('citas_paciente', id_paciente=paciente[0]) }}" class="btn btn-secondary btn-block">Citas</a>
+                        <label for="peso">Peso:</label>
+                        <input type="number" id="peso" name="peso" step="0.1"> Kg
+                        <label for="talla">Talla:</label>
+                        <input type="number" id="talla" name="talla" step="0.01"> m
+                        <label for="ta_sistolica">TA Sistólica:</label>
+                        <input type="number" id="ta_sistolica" name="ta_sistolica"> mmHg
+                        <label for="ta_diastolica">TA Diastólica:</label>
+                        <input type="number" id="ta_diastolica" name="ta_diastolica"> mmHg
+                        <label for="frecuencia_cardiaca">Frecuencia Cardíaca:</label>
+                        <input type="number" id="frecuencia_cardiaca" name="frecuencia_cardiaca"> lat/min
+                        <label for="frecuencia_respiratoria">Frecuencia Respiratoria:</label>
+                        <input type="number" id="frecuencia_respiratoria" name="frecuencia_respiratoria"> resp/min
+                        <label for="temperatura">Temperatura:</label>
+                        <input type="number" id="temperatura" name="temperatura" step="0.1"> °C
+                        <label for="cintura">Cintura:</label>
+                        <input type="number" id="cintura" name="cintura"> cm
+                        <label for="cadera">Cadera:</label>
+                        <input type="number" id="cadera" name="cadera"> cm
+                        <label for="icc">ICC:</label>
+                        <input type="number" id="icc" name="icc" step="0.01">
+                    </div>
+                </div>
+                <button class="accept-button">Aceptar</button>
+            </div>
+            <div class="registro-clinico">
+                <p>HOJA ELECTRÓNICA DE REGISTRO CLÍNICO</p>
+            </div>
+        </div>
+    </main>
+    <script>
+        function enableEditing() {
+            document.querySelectorAll('.custom-input').forEach(input => {
+                input.removeAttribute('readonly');
+            });
+            document.getElementById('btn-modificar').style.display = 'none';
+            document.getElementById('btn-guardar').style.display = 'inline-block';
+        }
+
+        function savePatient(event) {
+            event.preventDefault();
+            const form = event.target;
+            const formData = new FormData(form);
+            const id = form.dataset.patientId;
+
+            fetch(`/guardar_paciente/${id}`, {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert('Información del paciente actualizada correctamente');
+                    document.querySelectorAll('.custom-input').forEach(input => {
+                        input.setAttribute('readonly', true);
+                    });
+                    document.getElementById('btn-modificar').style.display = 'inline-block';
+                    document.getElementById('btn-guardar').style.display = 'none';
+                } else {
+                    alert(data.message);
+                }
+            })
+            .catch(error => {
+                alert('Ocurrió un error al guardar la información del paciente');
+                console.error('Error:', error);
+            });
+        }
+
+        function eliminarPaciente() {
+            const id = document.querySelector('form').dataset.patientId;
+            if (confirm('¿Está seguro que desea eliminar este paciente?')) {
+                fetch(`/eliminar_paciente/${id}`, {
+                    method: 'POST',
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert('Paciente eliminado correctamente');
+                        window.location.href = '/dashboard_medico';
+                    } else {
+                        alert('Hubo un error al eliminar el paciente: ' + data.message);
+                    }
+                })
+                .catch(error => {
+                    alert('Ocurrió un error al eliminar el paciente');
+                    console.error('Error:', error);
+                });
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", function() {
+            const form = document.querySelector('form');
+            form.addEventListener('submit', savePatient);
+        });
+    </script>
+</body>
+</html>

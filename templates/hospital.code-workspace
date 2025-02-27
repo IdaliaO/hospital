@@ -1,0 +1,20 @@
+{
+	"folders": [
+		{
+			"path": "../../../../../../../../laragon/www/hospital"
+		},
+		{
+			"path": "../.venv"
+		},
+		{
+			"path": "../static"
+		},
+		{
+			"path": "."
+		},
+		{
+			"path": "../venv"
+		}
+	],
+	"settings": {}
+}

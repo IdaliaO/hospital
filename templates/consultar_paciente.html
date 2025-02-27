@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consultar Paciente</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='consultar_paciente.css') }}" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5 position-relative">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="bg-custom-green p-4">
+                    <h3>Expediente médico</h3>
+                    <a href="{{ url_for('exploracion_diagnostico', id=paciente[0]) }}" class="btn btn-primary btn-block mb-2">Exploración y diagnóstico</a>
+                    <a href="{{ url_for('citas_paciente', id_paciente=paciente[0]) }}" class="btn btn-secondary btn-block">Citas</a>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <form id="patient-form" data-patient-id="{{ paciente[0] }}">
+                    <div class="form-group">
+                        <label for="medico">Médico</label>
+                        <input type="text" class="form-control custom-input" id="medico" value="{{ session['rfc'] }}" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="nombre_completo">Nombre Completo</label>
+                        <input type="text" class="form-control custom-input" id="nombre_completo" name="nombre_completo" value="{{ paciente[1] }}" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="fecha_nacimiento">Fecha de nacimiento</label>
+                        <input type="date" class="form-control custom-input" id="fecha_nacimiento" name="fecha_nacimiento" value="{{ paciente[2] }}" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="enfermedades_cronicas">Enfermedades crónicas</label>
+                        <input type="text" class="form-control custom-input" id="enfermedades_cronicas" name="enfermedades_cronicas" value="{{ paciente[3] }}" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="alergias">Alergias</label>
+                        <input type="text" class="form-control custom-input" id="alergias" name="alergias" value="{{ paciente[4] }}" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="antecedentes_familiares">Antecedentes familiares</label>
+                        <input type="text" class="form-control custom-input" id="antecedentes_familiares" name="antecedentes_familiares" value="{{ paciente[5] }}" readonly>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <button type="button" class="btn btn-primary" id="btn-modificar" onclick="enableEditing()">Modificar</button>
+                        <button type="submit" class="btn btn-success" id="btn-guardar" style="display:none;">Guardar</button>
+                        
+                    </div>
+                </form>
+            </div>
+        </div>
+        <a href="{{ url_for('dashboard_medico') }}" class="btn btn-secondary btn-regresar">Regresar</a>
+    </div>
+    <script>
+        function enableEditing() {
+            document.querySelectorAll('.custom-input').forEach(input => {
+                input.removeAttribute('readonly');
+            });
+            document.getElementById('btn-modificar').style.display = 'none';
+            document.getElementById('btn-guardar').style.display = 'inline-block';
+        }
+
+        function savePatient(event) {
+            event.preventDefault();
+            const form = event.target;
+            const formData = new FormData(form);
+            const id = form.dataset.patientId;
+
+            fetch(`/guardar_paciente/${id}`, {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert('Información del paciente actualizada correctamente');
+                    document.querySelectorAll('.custom-input').forEach(input => {
+                        input.setAttribute('readonly', true);
+                    });
+                    document.getElementById('btn-modificar').style.display = 'inline-block';
+                    document.getElementById('btn-guardar').style.display = 'none';
+                } else {
+                    alert(data.message);
+                }
+            })
+            .catch(error => {
+                alert('Ocurrió un error al guardar la información del paciente');
+                console.error('Error:', error);
+            });
+        }
+
+        
+        
+
+        document.addEventListener("DOMContentLoaded", function() {
+            const form = document.querySelector('form');
+            form.addEventListener('submit', savePatient);
+        });
+    </script>
+</body>
+</html>

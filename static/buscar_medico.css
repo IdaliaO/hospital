@@ -1,0 +1,49 @@
+.bg-custom-green {
+    background-color: #e0ede6; /* Fondo verde claro */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+h4 {
+    color: #004d40; /* Verde oscuro */
+}
+
+.form-control.custom-input {
+    background-color: #ffffff; /* Blanco para el fondo del input */
+    border-color: #b0bec5; /* Gris claro para el borde */
+}
+
+.btn-primary {
+    background-color: #546e7a; /* Azul grisáceo */
+    border-color: #546e7a;
+}
+
+.btn-secondary {
+    background-color: #90a4ae; /* Gris claro */
+    border-color: #90a4ae;
+}
+
+.btn-danger {
+    background-color: #e57373; /* Rojo claro */
+    border-color: #e57373;
+}
+
+.btn-success {
+    background-color: #81c784; /* Verde claro */
+    border-color: #81c784;
+}
+
+.btn-primary:hover, .btn-secondary:hover, .btn-danger:hover, .btn-success:hover {
+    opacity: 0.8;
+}
+
+.bg-light {
+    background-color: #a9c9c9; /* Fondo verde muy claro */
+}
+
+.alert {
+    color: #004d40; /* Texto verde oscuro */
+    background-color: #e0f7fa; /* Fondo verde claro */
+    border-color: #004d40; /* Borde verde oscuro */
+}

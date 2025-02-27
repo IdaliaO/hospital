@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Médicos</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='ver_medicos.css') }}" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+</head>
+<body>
+    <div class="container mt-5">
+        <h3>Medicos Registrados</h3>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>RFC</th>
+                    <th>Nombre Completo</th>
+                    <th>Matrícula</th>
+                    <th>Rol</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for medico in medicos %}
+                <tr id="medico-{{ medico.rfc }}">
+                    <td>{{ medico.rfc }}</td>
+                    <td>{{ medico.nombre_completo }}</td>
+                    <td>{{ medico.cedula_profesional }}</td>
+                    <td>{{ medico.rol }}</td>
+                    <td>
+                        <button class="btn btn-primary" onclick="ocultarMedico('{{ medico.rfc }}')">Ocultar</button>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <a href="{{ url_for('dashboard_admin') }}" class="btn btn-secondary mt-3">Regresar</a>
+    </div>
+    <script>
+        function ocultarMedico(rfc) {
+            if (confirm('¿Está seguro de que desea ocultar este médico?')) {
+                $.post(`/ocultar_medico/${rfc}`, function(data) {
+                    if (data.success) {
+                        alert(data.message);
+                        $(`#medico-${rfc}`).remove();
+                    } else {
+                        alert('Hubo un error al ocultar el médico.');
+                    }
+                });
+            }
+        }
+    </script>
+</body>
+</html>
+

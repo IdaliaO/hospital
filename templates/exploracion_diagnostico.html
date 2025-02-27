@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exploración y Diagnóstico</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='exploracion_diagnostico.css') }}" rel="stylesheet">
+    <script>
+        function validateForm() {
+            var inputs = document.querySelectorAll('.form-control');
+            for (var i = 0; i < inputs.length; i++) {
+                if (inputs[i].value.trim() === "") {
+                    alert("Todos los campos deben estar llenos.");
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        document.addEventListener("DOMContentLoaded", function() {
+            document.getElementById('exploracion-diagnostico-form').onsubmit = validateForm;
+        });
+    </script>
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-5">
+                <div class="bg-custom-green p-4 shadow-sm rounded h-100">
+                    <h3 class="text-center">Exploración</h3>
+                    <form id="exploracion-diagnostico-form" action="{{ url_for('guardar_consulta', id=paciente[0]) }}" method="POST">
+                        <div class="form-group">
+                            <label for="fecha">Fecha</label>
+                            <input type="date" class="form-control" id="fecha" name="fecha">
+                        </div>
+                        <div class="form-group">
+                            <label for="peso">Peso</label>
+                            <input type="text" class="form-control" id="peso" name="peso">
+                        </div>
+                        <div class="form-group">
+                            <label for="altura">Altura</label>
+                            <input type="text" class="form-control" id="altura" name="altura">
+                        </div>
+                        <div class="form-group">
+                            <label for="temperatura">Temperatura</label>
+                            <input type="text" class="form-control" id="temperatura" name="temperatura">
+                        </div>
+                        <div class="form-group">
+                            <label for="latidosxmin">Latidos x min</label>
+                            <input type="text" class="form-control" id="latidosxmin" name="latidosxmin">
+                        </div>
+                        <div class="form-group">
+                            <label for="oxigenacion">Oxigenación</label>
+                            <input type="text" class="form-control" id="oxigenacion" name="oxigenacion">
+                        </div>
+                        <div class="form-group">
+                            <label for="glucosa">Glucosa</label>
+                            <input type="text" class="form-control" id="glucosa" name="glucosa">
+                        </div>
+                        <div class="form-group">
+                            <label for="edad">Edad</label>
+                            <input type="text" class="form-control" id="edad" name="edad">
+                        </div>
+                </div>
+            </div>
+            <div class="col-md-7">
+                <div class="bg-light p-4 shadow-sm rounded h-100">
+                    <h3 class="text-center">Diagnóstico</h3>
+                        <div class="form-group">
+                            <label for="sintomas">Síntomas</label>
+                            <textarea class="form-control" id="sintomas" name="sintomas" rows="3"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="diagnostico">Diagnóstico</label>
+                            <textarea class="form-control" id="diagnostico" name="diagnostico" rows="3"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="tratamiento">Tratamiento</label>
+                            <textarea class="form-control" id="tratamiento" name="tratamiento" rows="5"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="estudios">Solicitud de estudios</label>
+                            <textarea class="form-control" id="estudios" name="estudios" rows="2"></textarea>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <button type="submit" class="btn btn-primary">Guardar</button>
+                            <a href="{{ url_for('consultar_paciente', id=paciente[0]) }}" class="btn btn-secondary">Regresar</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

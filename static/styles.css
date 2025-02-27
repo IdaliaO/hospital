@@ -1,0 +1,107 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #004d40;
+    color: white;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header h1 {
+    margin: 0;
+}
+
+.user-info {
+    display: flex;
+    gap: 20px;
+}
+
+.header-info {
+    background-color: #e0e0e0;
+    padding: 10px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border-bottom: 2px solid #ccc;
+}
+
+.content {
+    display: flex;
+    padding: 20px;
+    gap: 20px;
+}
+
+.patient-info, .somatometria {
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+   
+    flex: 1;
+}
+
+.patient-info h2, .somatometria h2 {
+    margin-top: 0;
+}
+
+.form-section {
+    display: flex;
+    gap: 20px;
+}
+
+.form-section img {
+    max-width: 200px;
+}
+
+.measurements {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.measurements label {
+    display: block;
+    margin: 5px 0;
+}
+
+.measurements input {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.accept-button {
+    background-color: #004d40;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.accept-button:hover {
+    background-color: #00796b;
+}
+
+.registro-clinico {
+    background-color: #e0e0e0;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    font-weight: bold;
+    color: #004d40;
+    flex: 0 0 40px;
+}

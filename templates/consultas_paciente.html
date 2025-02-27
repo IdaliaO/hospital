@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consultas del Paciente</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='consultas_paciente.css') }}" rel="stylesheet">
+    <script>
+        function selectConsulta(idConsulta) {
+            window.location.href = '/ver_receta3/' + idConsulta;
+        }
+    </script>
+</head>
+<body>
+    <div class="container mt-5">
+        <h3>Consultas</h3>
+        <p><strong>Paciente:</strong> {{ paciente_nombre }}</p>
+        <ul class="list-group mt-3">
+            {% if consultas %}
+                {% for consulta in consultas %}
+                    <li class="list-group-item d-flex justify-content-between align-items-center" onclick="selectConsulta('{{ consulta.id }}')">
+                        <span>Fecha: {{ consulta.fecha }} - Diagnóstico: {{ consulta.diagnostico }}</span>
+                    </li>
+                {% endfor %}
+            {% else %}
+                <li class="list-group-item">No hay consultas registradas para este paciente.</li>
+            {% endif %}
+        </ul>
+        <a href="{{ url_for('ver_pacientes') }}" class="btn btn-secondary mt-3 btn-regresar">Regresar</a>
+    </div>
+</body>
+</html>

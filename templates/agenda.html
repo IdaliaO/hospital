@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agenda del Médico</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='agenda.css') }}" rel="stylesheet">
+    <script>
+        function selectFecha() {
+            const fecha = document.getElementById('fecha').value;
+            if (fecha) {
+                window.location.href = '/citas_del_dia?fecha=' + fecha;
+            } else {
+                alert("Por favor, seleccione una fecha.");
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="container mt-5">
+        <h3>Agenda del Médico</h3>
+        <div class="form-group mt-3">
+            <label for="fecha">Seleccione una fecha:</label>
+            <input type="date" id="fecha" name="fecha" class="form-control">
+        </div>
+        <button class="btn btn-primary mt-3" onclick="selectFecha()">Seleccionar</button>
+        <a href="{{ url_for('dashboard_medico') }}" class="btn btn-secondary mt-3">Regresar</a>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

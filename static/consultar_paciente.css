@@ -1,0 +1,85 @@
+body {
+    background-color: #e0ede6;
+    font-family: Arial, sans-serif;
+    margin: 0;
+}
+
+.container {
+    max-width: 900px;
+    position: relative;
+    padding-bottom: 50px;
+}
+
+.bg-custom-green {
+    background-color: #d4e3d8;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    text-align: center;
+}
+
+h3 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    font-weight: bold;
+    color: #333;
+}
+
+.custom-input {
+    background-color: #f5f5f5;
+    color: #333;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+.custom-input[readonly] {
+    background-color: #f5f5f5;
+}
+
+.btn {
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    margin-top: 10px;
+}
+
+.btn-primary {
+    background-color: #517a7a;
+    color: #fff;
+}
+
+.btn-primary:hover {
+    background-color: #415f5f;
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+    color: #fff;
+}
+
+.btn-secondary:hover {
+    background-color: #5a6268;
+}
+
+.btn-success {
+    background-color: #6c757d;
+    color: #fff;
+}
+
+.btn-success:hover {
+    background-color: #6c757d;
+}
+
+.btn-regresar {
+    padding: 5px 10px;
+    font-size: 0.9rem;
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+}

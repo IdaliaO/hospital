@@ -1,0 +1,65 @@
+body {
+    background-color: #e0ede6; /* Color de fondo */
+}
+
+.container {
+    margin-top: 50px;
+    max-width: 600px;
+    background-color: #d4e3d8; /* Cuadro blanco */
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
+}
+
+h2 {
+    color: #495057; /* Color de texto */
+}
+
+.form-group label {
+    color: #495057; /* Color de texto */
+}
+
+.form-control {
+    background-color: #a9c9c9; /* Color de fondo de los campos de texto */
+    border: none;
+    border-radius: 5px; /* Bordes redondeados */
+    padding: 10px;
+    color: #ffffff; /* Color de texto */
+    opacity: 0.8;
+}
+
+.form-control::placeholder {
+    color: #495057; /* Color de texto de los placeholders */
+}
+
+.btn-primary {
+    background-color: #6c757d; /* Color del botón Guardar */
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    color: #ffffff; /* Color de texto del botón */
+}
+
+.btn-primary:hover {
+    background-color: #5a6268;
+}
+
+.btn-secondary {
+    background-color: #6c757d; /* Color del botón Atrás */
+    border: none;
+    padding: 5px 20px;
+    border-radius: 5px;
+    color: #ffffff; /* Color de texto del botón */
+}
+
+.btn-secondary:hover {
+    background-color: #5a6268;
+}
+
+.d-flex {
+    display: flex;
+}
+
+.justify-content-between {
+    justify-content: space-between;
+}

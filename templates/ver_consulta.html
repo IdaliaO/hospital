@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consulta del Paciente</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='ver_consulta.css') }}" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h3>Consulta del Paciente: {{ consulta.nombre_completo }}</h3>
+        <form action="{{ url_for('guardar_consulta', id=consulta.id) }}" method="POST">
+            <div class="form-group">
+                <label for="fecha">Fecha</label>
+                <input type="date" class="form-control" id="fecha" name="fecha" value="{{ consulta.fecha }}" required>
+            </div>
+            <div class="form-group">
+                <label for="diagnostico">Diagnóstico</label>
+                <input type="text" class="form-control" id="diagnostico" name="diagnostico" value="{{ consulta.diagnostico }}" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Guardar</button>
+            <button type="button" class="btn btn-secondary" onclick="window.print()">Imprimir</button>
+        </form>
+        <a href="{{ url_for('consultas_paciente', id=consulta.id_paciente) }}" class="btn btn-secondary mt-3">Regresar</a>
+    </div>
+</body>
+</html>

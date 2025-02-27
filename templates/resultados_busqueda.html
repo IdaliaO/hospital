@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resultados de búsqueda</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='resultados_busqueda.css') }}" rel="stylesheet">
+   
+    <script>
+        function selectPatient(element) {
+            let items = document.querySelectorAll('.list-group-item');
+            items.forEach(item => item.classList.remove('selected'));
+            element.classList.add('selected');
+            document.getElementById('selected_patient').value = element.dataset.value;
+        }
+
+        function validateForm() {
+            let selectedPatient = document.getElementById('selected_patient').value;
+            if (!selectedPatient) {
+                alert('Por favor, seleccione un paciente.');
+                return false;
+            }
+            return true;
+        }
+    </script>
+</head>
+<body>
+    <div class="container mt-5">
+        <h3>Resultados de búsqueda</h3>
+        <form action="{{ url_for('seleccionar_paciente') }}" method="POST" onsubmit="return validateForm()">
+            <div class="list-group mt-3">
+                {% if resultados %}
+                    {% for resultado in resultados %}
+                        <div class="list-group-item" data-value="{{ resultado[0] }}" onclick="selectPatient(this)">
+                            {{ resultado[1] }}
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <div class="list-group-item">No se encontraron pacientes</div>
+                {% endif %}
+            </div>
+            <input type="hidden" id="selected_patient" name="selected_patient">
+            <div class="mt-3">
+                <a href="{{ url_for('dashboard_medico') }}" class="btn btn-secondary btn-regresar">Regresar</a>
+                {% if resultados %}
+                    <button type="submit" class="btn btn-primary">Seleccionar</button>
+                {% endif %}
+            </div>
+        </form>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script id="flash-messages" type="application/json">
+        {{ get_flashed_messages(with_categories=true) | tojson | safe }}
+    </script>
+    <script type="text/javascript">
+        document.addEventListener("DOMContentLoaded", function() {
+            var messagesElement = document.getElementById("flash-messages");
+            if (messagesElement) {
+                var messages = JSON.parse(messagesElement.textContent);
+                messages.forEach(function(message) {
+                    var category = message[0];
+                    var msg = message[1];
+                    if (category === 'danger') {
+                        alert(msg);
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
